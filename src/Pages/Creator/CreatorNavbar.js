@@ -41,7 +41,7 @@ function CreatorNavbar({url}) {
               Home
             </Nav.Link>
             <Nav.Link
-              href="/subscription"
+              href="/creatorsubscribers"
               className="landingpage_links me-5"
               id="landingpage_links_hover"
             >

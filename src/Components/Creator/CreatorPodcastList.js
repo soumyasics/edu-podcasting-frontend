@@ -10,7 +10,7 @@ function CreatorPodcastList({ data }) {
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
   };
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
   const [creatorpodcast, setCreatorpodcast] = useState([]);
   useEffect(() => {
@@ -29,25 +29,25 @@ function CreatorPodcastList({ data }) {
     console.log(creatorpodcast, "ll");
   }, []);
 
-  const gotoEpisode=(id)=>{
+  const gotoEpisode = (id) => {
     navigate(`/creatorepisodes/${id}`)
   }
-  const gotoPayment=(id)=>{
+  const gotoPayment = (id) => {
     navigate(`/paymentform/${id}`)
   }
   return (
     <div className="podcast_list_main">
       <div class="container ">
-      <h5 className="text-dark mt- pt-5">My podcasts</h5>
+        <h5 className="text-dark mt- pt-5">podcasts</h5>
         <div class="row">
           {creatorpodcast.length ? (
             creatorpodcast.map((a) => {
               return (
-                <div  className="card col-3" id="podcastlist_card">
+                <div className="card col-3" id="podcastlist_card">
                   <div class="podcastlist_card_img">
                     <img
-                    src={data.url + a.coverimage.filename}
-                    class="card-img-top"
+                      src={data.url + a.coverimage.filename}
+                      class="card-img-top"
                       id="adminclub"
                       alt="..."
                     />
@@ -57,18 +57,19 @@ function CreatorPodcastList({ data }) {
                     <h6 class="card-text col">{a.creatorname}</h6>
                     <h6 class="card-text">{a.description}</h6>
                     <h6 class="card-text">{a.price}</h6>
-                    {data.role === 'creator' ? '' : <button onClick={()=>gotoPayment(a._id)} >Subscribe</button>}
-                    {data.role === 'creator'?<div className="text-center m-3"><button onClick={()=>gotoEpisode(a._id + ',' + a.podcastname)} className="episodebtn">Go to Episode
-                      <FaPlus  />
-                    </button></div>:""}
                     <div>
-                  <audio controls className="w-100">
-                    <source src={a.audio ? data.url + a.audio.filename : ''} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                </div>
+                      <audio controls className="w-100">
+                        <source src={a.audio ? data.url + a.audio.filename : ''} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                      {data.role === 'creator' ? '' : <div className="text-center"> <button className="episodebtn" onClick={() => gotoPayment(a._id)} >Subscribe</button></div>}
+                      {data.role === 'creator' ? <div className="text-center m-3"><button onClick={() => gotoEpisode(a._id + ',' + a.podcastname)} className="episodebtn">Go to Episode
+                        <FaPlus />
+                      </button></div> : ""}
+
+                    </div>
                   </div>
-                  
+
                 </div>
               );
             })
